@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Health Prediction App</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body { background: #f4f6f9; }
+
+        .container { margin-top: 25px; }
+
+        .card {
+            padding: 20px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .btn { margin: 3px; }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+            color: gray;
+        }
+
+        .total {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- FORM -->
+    <div class="card shadow">
+        <h3 class="text-center">🏥 Health Prediction System</h3>
+
+        <form method="POST" class="row g-2">
+
+            <div class="col-md-4">
+                <input class="form-control" name="name" placeholder="👤 Name" required>
+            </div>
+
+            <div class="col-md-4">
+                <input class="form-control" type="date" name="dob" required>
+            </div>
+
+            <div class="col-md-4">
+                <input class="form-control" name="email" placeholder="📧 Email" required>
+            </div>
+
+            <div class="col-md-4">
+                <input class="form-control" name="glucose" placeholder="🩸 Glucose" required>
+            </div>
+
+            <div class="col-md-4">
+                <input class="form-control" name="haemoglobin" placeholder="🧬 Hb" required>
+            </div>
+
+            <div class="col-md-4">
+                <input class="form-control" name="cholesterol" placeholder="❤️ Cholesterol" required>
+            </div>
+
+            <div class="col-12">
+                <button class="btn btn-primary w-100">➕ Add Patient</button>
+            </div>
+
+        </form>
+    </div>
+
+    <!-- TABLE -->
+    <div class="card shadow">
+
+        <h5>📋 Patient Records</h5>
+
+        <table class="table table-bordered table-hover mt-3">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>DOB</th>
+                    <th>Email</th>
+                    <th>Glucose</th>
+                    <th>Hb</th>
+                    <th>Cholesterol</th>
+                    <th>Remarks</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for p in patients %}
+                <tr>
+                    <td>{{ p[1] }}</td>
+                    <td>{{ p[2] }}</td>
+                    <td>{{ p[3] }}</td>
+                    <td>{{ p[4] }}</td>
+                    <td>{{ p[5] }}</td>
+                    <td>{{ p[6] }}</td>
+                    <td>{{ p[7] }}</td>
+                    <td>
+                        <a href="/edit/{{ p[0] }}" class="btn btn-warning btn-sm">✏️ Edit</a>
+                        <a href="/delete/{{ p[0] }}" class="btn btn-danger btn-sm"
+                           onclick="return confirm('Delete this patient?')">🗑️ Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+        <!-- TOTAL PATIENTS (BOTTOM ONLY) -->
+        <div class="total">
+            🧾 Total Patients: {{ total }}
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        👨‍💻 Arya Jain | Flask • SQLite • Gemini AI Web App
+    </div>
+
+</div>
+
+</body>
+</html>
